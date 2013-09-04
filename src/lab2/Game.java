@@ -9,5 +9,23 @@ package lab2;
  * @author Andy
  */
 public class Game {
+    private String gameTitle;
+    private boolean playerTurn;
+    private boolean gameOver;
+    //private GameCharacter enemy;
+    
+    public Game(){
+        playerTurn = true;
+        //enemy = new GameCharacter("Enemy");
+    }
+    
+    public boolean isPlayerTurn(){
+        return playerTurn;
+    }
+    
+    public boolean isGameOver(){
+        return gameOver;
+    }
+    
     
 }
