@@ -11,27 +11,76 @@ import java.util.Date;
  * @version     1.01
  */
 public class Employee {
-    String firstName;
-    String lastName;
-    public String ssn;
-    public Date birthDate;
-    boolean metWithHr;
-    boolean metDeptStaff;
-    boolean reviewedDeptPolicies;
-    boolean movedIn;
-    String cubeId;
+    private String firstName;
+    private String lastName;
+    private String ssn;
+    private Date birthDate;
+    private boolean metWithHr;
+    private boolean metDeptStaff;
+    private boolean reviewedDeptPolicies;
+    private boolean movedIn;
+    private String cubeId;
 
     public Employee() {
 
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        if(firstName.length() <=0 || firstName == null){
+            System.out.println("Invalid first name, try again.");
+        }
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        if(lastName.length() <=0 || lastName == null){
+            System.out.println("Invalid last name, try again.");
+        }
+        this.lastName = lastName;
+    }
+
+    public String getSsn() {
+        return ssn;
+    }
+
+    public void setSsn(String ssn) {
+        if(ssn.length() <8 || ssn == null){
+            System.out.println("Invalid ssn, try again.");
+        }
+        this.ssn = ssn;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getCubeId() {
+        return cubeId;
+    }
+
+    public void setCubeId(String cubeId) {
+        this.cubeId = cubeId;
+    }
+
     // Assume this must be performed first
-    public void meetWithHrForBenefitAndSalryInfo() {
+    private void meetWithHrForBenefitAndSalryInfo() {
         metWithHr = true;
     }
 
     // Assume this is must be performed second
-    public void meetDepartmentStaff() {
+    private void meetDepartmentStaff() {
         if(metWithHr) {
             metDeptStaff = true;
         } else {
@@ -41,7 +90,7 @@ public class Employee {
     }
 
     // Assume this must be performed third
-    public void reviewDeptPolicies() {
+    private void reviewDeptPolicies() {
         if(metWithHr && metDeptStaff) {
             reviewedDeptPolicies = true;
         } else {
@@ -52,7 +101,7 @@ public class Employee {
     }
 
     // Assume this must be performed 4th
-    public void moveIntoCubicle(String cubeId) {
+    private void moveIntoCubicle(String cubeId) {
         if(metWithHr && metDeptStaff && reviewedDeptPolicies) {
             this.cubeId = cubeId;
             this.movedIn = true;
@@ -65,6 +114,14 @@ public class Employee {
 
     }
 
+    public void attendOrientation(){
+        
+        meetWithHrForBenefitAndSalryInfo();
+        meetDepartmentStaff();
+        reviewDeptPolicies();
+        moveIntoCubicle("12345A");
+    }
+    
     public String getStatus() {
         if(metWithHr && metDeptStaff
            && reviewedDeptPolicies && movedIn) {
