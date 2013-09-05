@@ -20,6 +20,14 @@ public class GameCharacter {
         characterHp = MAX_HP;
         characterLives = MAX_LIVES;
     }
+
+    public int getMAX_HP() {
+        return MAX_HP;
+    }
+
+    public int getMAX_LIVES() {
+        return MAX_LIVES;
+    }
     
     public int getCharacterHp(){
         return characterHp;
@@ -41,7 +49,7 @@ public class GameCharacter {
         this.characterLives = characterLives;
     }
     
-    public void takeDamage(int damageAmount){
+    /*public void takeDamage(int damageAmount){
         // validate damage amount
         if(getCharacterHp() <= damageAmount){
             loseLife();
@@ -66,5 +74,5 @@ public class GameCharacter {
     
     private void destroyCharacter(){
         System.out.println(getCharacterName() + " has no more lives remaining! GAME OVER.");
-    }
+    }*/
 }

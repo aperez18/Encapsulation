@@ -23,15 +23,15 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
     private final int MAX_RECS = 10;
     private final int NOT_FOUND = -1;
 
-    String partNo;
-    int foundIndex = NOT_FOUND;
+    private String partNo;
+    private int foundIndex = NOT_FOUND;
     private String partDesc;
-    double partPrice;
+    private double partPrice;
 
-    String[] partNums = new String[10];
-    String[] partDescs = new String[10];
-    double[] partPrices = new double[10];
-    int emptyRow;
+    private String[] partNums = new String[10];
+    private String[] partDescs = new String[10];
+    private double[] partPrices = new double[10];
+    private int emptyRow;
 
     /** Creates new form MainGUI */
     public MainGUI() {
@@ -294,6 +294,7 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
         this.txtNewProdNo.requestFocus();
 }//GEN-LAST:event_btnEnterRecordActionPerformed
 
+    
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String searchNum = txtSearchPartNo.getText();
         if (searchNum != null && searchNum.length() > 0) {

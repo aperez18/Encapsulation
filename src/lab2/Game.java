@@ -27,5 +27,30 @@ public class Game {
         return gameOver;
     }
     
+    public void damageCharacter(GameCharacter character, int damageAmount){
+        // validate damage amount
+        if(character.getCharacterHp() <= damageAmount){
+            loseLife(character);
+            System.out.println(character.getCharacterLives() + " lives remaining.");
+            if(character.getCharacterLives() == 0){
+                destroyCharacter(character);
+            }
+        }else{
+            character.setCharacterHp((character.getCharacterHp()-damageAmount));
+        }
+    }
     
+    private void gainLife(GameCharacter character){
+        if(character.getCharacterLives() < character.getMAX_LIVES()){
+            character.setCharacterLives(character.getCharacterLives()+1);
+        }
+    }
+    
+    private void loseLife(GameCharacter character){
+        character.setCharacterLives(character.getCharacterLives()-1);
+    }
+    
+    private void destroyCharacter(GameCharacter character){
+        System.out.println(character.getCharacterName() + " has no more lives remaining! GAME OVER.");
+    }
 }
