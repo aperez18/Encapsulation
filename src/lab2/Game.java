@@ -9,14 +9,14 @@ package lab2;
  * @author Andy
  */
 public class Game {
-    private int playerChoice;
     private final int ATTACK = 1;
     private final int DEFEND = 2;
     private final int FLEE = 3;
     private final int QUIT = 4;
+    private int damage;
     private boolean playerTurn;
     private boolean gameOver;
-    //private GameCharacter character;
+    private GameCharacter character;
     
     public Game(){
         playerTurn = true;
@@ -29,6 +29,23 @@ public class Game {
     
     public boolean isGameOver(){
         return gameOver;
+    }
+    
+    public void executePlayerDecision(int playerDecision){
+        if(playerDecision == ATTACK){
+            calculateDamage();
+            damageCharacter(character, damage);
+        }else if(playerDecision == DEFEND){
+            damage = 0;
+        }else if(playerDecision == FLEE){
+            loseLife(character);
+        }else{
+            destroyCharacter(character);
+        }
+    }
+    
+    private void calculateDamage(){
+        damage = 25;
     }
     
     private void damageCharacter(GameCharacter character, int damageAmount){
