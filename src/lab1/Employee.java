@@ -115,7 +115,6 @@ public class Employee {
     }
 
     public void attendOrientation(){
-        
         meetWithHrForBenefitAndSalryInfo();
         meetDepartmentStaff();
         reviewDeptPolicies();

@@ -70,9 +70,5 @@ public class GameCharacter {
     
     public void loseLife(){
         characterLives--;
-    }
-    
-    private void destroyCharacter(){
-        System.out.println(getCharacterName() + " has no more lives remaining! GAME OVER.");
     }*/
 }

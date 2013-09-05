@@ -9,14 +9,18 @@ package lab2;
  * @author Andy
  */
 public class Game {
-    private String gameTitle;
+    private int playerChoice;
+    private final int ATTACK = 1;
+    private final int DEFEND = 2;
+    private final int FLEE = 3;
+    private final int QUIT = 4;
     private boolean playerTurn;
     private boolean gameOver;
-    //private GameCharacter enemy;
+    //private GameCharacter character;
     
     public Game(){
         playerTurn = true;
-        //enemy = new GameCharacter("Enemy");
+        //character = new GameCharacter("Player 1");
     }
     
     public boolean isPlayerTurn(){
@@ -27,7 +31,7 @@ public class Game {
         return gameOver;
     }
     
-    public void damageCharacter(GameCharacter character, int damageAmount){
+    private void damageCharacter(GameCharacter character, int damageAmount){
         // validate damage amount
         if(character.getCharacterHp() <= damageAmount){
             loseLife(character);
@@ -37,12 +41,6 @@ public class Game {
             }
         }else{
             character.setCharacterHp((character.getCharacterHp()-damageAmount));
-        }
-    }
-    
-    private void gainLife(GameCharacter character){
-        if(character.getCharacterLives() < character.getMAX_LIVES()){
-            character.setCharacterLives(character.getCharacterLives()+1);
         }
     }
     

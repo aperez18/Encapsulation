@@ -10,4 +10,15 @@ package lab2;
  */
 public class GUI {
     
+    private void closeWindow(){
+        //closes the window
+    }
+    
+    private void clearWindow(){
+        //clears the window
+    }
+    
+    private void openWindow(){
+        //opens the window
+    }
 }
