@@ -39,7 +39,7 @@ public class Game {
             damage = 0;
         }else if(playerDecision == FLEE){
             loseLife(character);
-        }else{
+        }else if(playerDecision == QUIT){
             destroyCharacter(character);
         }
     }

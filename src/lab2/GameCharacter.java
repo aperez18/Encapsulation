@@ -14,6 +14,8 @@ public class GameCharacter {
     private final int MAX_LIVES = 3;
     private int characterHp;
     private int characterLives;
+    private Weapon weapon;
+    private Spec specialty;
     
     public GameCharacter(String characterName){
         this.characterName = characterName;
@@ -49,26 +51,16 @@ public class GameCharacter {
         this.characterLives = characterLives;
     }
     
-    /*public void takeDamage(int damageAmount){
-        // validate damage amount
-        if(getCharacterHp() <= damageAmount){
-            loseLife();
-            System.out.println(getCharacterLives() + " lives remaining.");
-            if(getCharacterLives() == 0){
-                destroyCharacter();
-            }
-        }else{
-            characterHp-= damageAmount;
-        }
+    public void setLoadout(){
+        setWeapon();
+        setSpec();
     }
     
-    public void gainLife(){
-        if(characterLives < MAX_LIVES){
-            characterLives++;
-        }
+    private void setWeapon(){
+        //logic to choose weapon
     }
     
-    public void loseLife(){
-        characterLives--;
-    }*/
+    private void setSpec(){
+        //logic to choose spec
+    }
 }
