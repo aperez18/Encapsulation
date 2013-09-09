@@ -303,8 +303,8 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
                     "Part Number not found. Please try again.",
                     "Not Found", JOptionPane.WARNING_MESSAGE);
            } else {
-                txtCurProdNo.setText(pmanager.getPartNums()[pmanager.getFoundIndex()]);
-                txtCurDesc.setText(pmanager.getPartDescs()[pmanager.getFoundIndex()]);
+                txtCurProdNo.setText(pmanager.getPartNums(pmanager.getFoundIndex()));
+                txtCurDesc.setText(pmanager.getPartDescs(pmanager.getFoundIndex()));
                 txtCurPrice.setText("" + pmanager.getPartPrices()[pmanager.getFoundIndex()]);
            }
         } else {
@@ -325,8 +325,8 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
                     "Part Number not found. Please try again.",
                     "Search Failure", JOptionPane.WARNING_MESSAGE);
         } else {
-            pmanager.getPartNums()[pmanager.getFoundIndex()] = txtCurProdNo.getText();
-            pmanager.getPartDescs()[pmanager.getFoundIndex()] = txtCurDesc.getText();
+            pmanager.setPartNums(txtCurProdNo.getText(), pmanager.getFoundIndex());
+            pmanager.setPartDescs(txtCurDesc.getText(), pmanager.getFoundIndex());
             pmanager.getPartPrices()[pmanager.getFoundIndex()] = Double.parseDouble(txtCurPrice.getText());
             displayList();
             JOptionPane.showMessageDialog(this,
@@ -344,8 +344,8 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
         listProducts.setText(""); // clear list
         listProducts.append("Part\tDesc\t\tPrice\n====\t====\t\t=====\n");
         for (int i = 0 ; i < emptyRow; i++) {
-            String rLine = pmanager.getPartNums()[i] + "\t"
-                    + pmanager.getPartDescs()[i] + "\t\t" + nf.format(pmanager.getPartPrices()[i]) + "\n";
+            String rLine = pmanager.getPartNums(i) + "\t"
+                    + pmanager.getPartDescs(i) + "\t\t" + nf.format(pmanager.getPartPrices()[i]) + "\n";
             listProducts.append(rLine);
         }
     }
@@ -360,15 +360,14 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
                 for(int i = 1; i <= emptyRow-passNum; i++) {
                     String temp = "";
                     temp += pmanager.getPartPrices()[i-1];
-                    partPrices[i] = Double.parseDouble(temp);
+                    pmanager.setPartPrices(Double.parseDouble(temp), i);
+                    temp = pmanager.getPartNums(i-1);
+                    pmanager.setPartNums(pmanager.getPartNums(i), i-1);
+                    pmanager.setPartNums(temp, i);
 
-                    temp = pmanager.getPartNums()[i-1];
-                    partNums[i-1] = partNums[i];
-                    partNums[i] = temp;
-
-                    temp = partDescs[i-1];
-                    partDescs[i-1] = partDescs[i];
-                    partDescs[i] = temp;
+                    temp = pmanager.getPartDescs(i-1);
+                    pmanager.setPartDescs(pmanager.getPartDescs(i), i-1);
+                    pmanager.setPartDescs(temp, i);
                 }
             }
             // Once it's sorted, display in the list box

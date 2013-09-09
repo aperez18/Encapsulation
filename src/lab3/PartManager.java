@@ -45,28 +45,28 @@ public class PartManager {
         this.partPrice = partPrice;
     }
 
-    public String[] getPartNums() {
-        return partNums;
+    public String getPartNums(int index) {
+        return partNums[index];
     }
 
-    public void setPartNums(String[] partNums) {
-        this.partNums = partNums;
+    public void setPartNums(String partNum, int index) {
+        this.partNums[index] = partNum;
     }
 
-    public String[] getPartDescs() {
-        return partDescs;
+    public String getPartDescs(int index) {
+        return partDescs[index];
     }
 
-    public void setPartDescs(String[] partDescs) {
-        this.partDescs = partDescs;
+    public void setPartDescs(String partDesc, int index) {
+        this.partDescs[index] = partDesc;
     }
 
     public double[] getPartPrices() {
         return partPrices;
     }
 
-    public void setPartPrices(double[] partPrices) {
-        this.partPrices = partPrices;
+    public void setPartPrices(double partPrice, int index) {
+        this.partPrices[index] = partPrice;
     }
 
     public int getFoundIndex() {
