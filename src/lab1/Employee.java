@@ -20,6 +20,7 @@ public class Employee {
     private boolean reviewedDeptPolicies;
     private boolean movedIn;
     private String cubeId;
+    private final int MIN_LENGTH = 2;
 
     public Employee() {
 
@@ -30,7 +31,7 @@ public class Employee {
     }
 
     public void setFirstName(String firstName) {
-        if(firstName.length() <=0 || firstName == null){
+        if(firstName.length() <= MIN_LENGTH || firstName == null){
             System.out.println("Invalid first name, try again.");
         }
         this.firstName = firstName;
