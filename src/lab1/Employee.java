@@ -33,8 +33,9 @@ public class Employee {
     public void setFirstName(String firstName) {
         if(firstName.length() <= MIN_LENGTH || firstName == null){
             System.out.println("Invalid first name, try again.");
+        }else{
+            this.firstName = firstName;
         }
-        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -42,10 +43,11 @@ public class Employee {
     }
 
     public void setLastName(String lastName) {
-        if(lastName.length() <=0 || lastName == null){
+        if(lastName.length() <=MIN_LENGTH || lastName == null){
             System.out.println("Invalid last name, try again.");
+        }else{
+            this.lastName = lastName;
         }
-        this.lastName = lastName;
     }
 
     public String getSsn() {
@@ -53,10 +55,11 @@ public class Employee {
     }
 
     public void setSsn(String ssn) {
-        if(ssn.length() <8 || ssn == null){
+        if(ssn.length() <MIN_LENGTH || ssn == null){
             System.out.println("Invalid ssn, try again.");
+        }else{
+            this.ssn = ssn;
         }
-        this.ssn = ssn;
     }
 
     public Date getBirthDate() {
@@ -64,7 +67,11 @@ public class Employee {
     }
 
     public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+        if(birthDate == null){
+            System.out.println("Invalid ssn, try again.");
+        }else{
+            this.birthDate = birthDate;
+        }
     }
 
     public String getCubeId() {
@@ -72,7 +79,11 @@ public class Employee {
     }
 
     public void setCubeId(String cubeId) {
-        this.cubeId = cubeId;
+        if(cubeId.length() < MIN_LENGTH || cubeId == null){
+            System.out.println("Invalid cube ID, please try again.");
+        }else{
+            this.cubeId = cubeId;
+        }
     }
 
     // Assume this must be performed first
@@ -91,7 +102,7 @@ public class Employee {
     }
 
     // Assume this must be performed third
-    private void reviewDeptPolicies() {
+    public void reviewDeptPolicies() {
         if(metWithHr && metDeptStaff) {
             reviewedDeptPolicies = true;
         } else {

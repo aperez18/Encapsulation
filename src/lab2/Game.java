@@ -32,6 +32,7 @@ public class Game {
     }
     
     public void executePlayerDecision(int playerDecision){
+        // validate playerDecision
         if(playerDecision == ATTACK){
             calculateDamage();
             damageCharacter(character, damage);
