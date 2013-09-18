@@ -16,10 +16,13 @@ public class PartManager {
     private final String MAX_LENGTH_ERROR = 
             "Sorry, you have reached the maximum of 10 items.\nNo more items can be saved.";
     private final String INCOMPLETE_ENTRY_ERROR =
-            "Sorry, you must complete all fields. Please try again.\n";
+            "Sorry, you must complete all fields. Please try again.";
+    private final String NOT_FOUND_ERROR = 
+            "Part Number not found. Please try again.";
     private int foundIndex = NOT_FOUND;
     
     private Part[] parts;
+    private int index = 0;
 
     public PartManager(){
         parts = new Part[MIN_RECS];
@@ -39,14 +42,11 @@ public class PartManager {
             JOptionPane.showMessageDialog(null, INCOMPLETE_ENTRY_ERROR);
         } else {
             
-            pmanager.enterRecord(emptyRow);
-            this.emptyRow += 1;
+            parts[index].setPartPrice(partPrice);
+            parts[index].setPartNo(partNo);
+            parts[index].setPartDesc(partDesc);
+            index++;
         }
-        parts[index].setPartNo(partNo);
-        
-        //partNums[index] = partNo;
-        //partDescs[index] = partDesc;
-        //partPrices[index] = partPrice;
     }
     
     public void searchParts(String searchNum){
@@ -57,6 +57,9 @@ public class PartManager {
                     break;
                 }
             }
+            if (foundIndex == NOT_FOUND) {
+                JOptionPane.showMessageDialog(null, NOT_FOUND_ERROR);
+            }
         }
     }
     
@@ -66,6 +69,6 @@ public class PartManager {
     
     public void addNewPart(){
         //Download Jim's example, STUDY .arraycopy() METHOD!!
-        Part temp[] = new Part[10];
+        Part temp[] = new Part[parts.length];
     }
 }

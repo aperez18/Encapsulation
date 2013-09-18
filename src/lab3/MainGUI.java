@@ -268,26 +268,13 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String searchNum = txtSearchPartNo.getText();
         if (searchNum != null && searchNum.length() > 0) {
-            /*for (int i = 0; i < this.pmanager.getPartNums().length; i++) {
-                if (searchNum.equalsIgnoreCase(pmanager.getPartNums()[i])) {
-                    foundIndex = i;
-                    break;
-                }
-            }*/
             pmanager.searchParts(searchNum);
-           if (pmanager.getFoundIndex() == NOT_FOUND) {
-                JOptionPane.showMessageDialog(this,
-                    "Part Number not found. Please try again.",
-                    "Not Found", JOptionPane.WARNING_MESSAGE);
-           } else {
                 txtCurProdNo.setText(pmanager.getPartNums(pmanager.getFoundIndex()));
                 txtCurDesc.setText(pmanager.getPartDescs(pmanager.getFoundIndex()));
                 txtCurPrice.setText("" + pmanager.getPartPrices()[pmanager.getFoundIndex()]);
-           }
-        } else {
-                JOptionPane.showMessageDialog(this,
-                    "Please enter a Part No. to search",
-                    "Entry Missing", JOptionPane.WARNING_MESSAGE);
+        }else{
+                JOptionPane.showMessageDialog(this, ENTRY_ERROR, "Entry Missing",
+                        JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_btnSearchActionPerformed
