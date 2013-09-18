@@ -4,90 +4,68 @@
  */
 package lab3;
 
+import javax.swing.JOptionPane;
 /**
  *
  * @author Andy
  */
 public class PartManager {
     private final int MAX_RECS = 10;
+    private final int MIN_RECS = 0;
     private final int NOT_FOUND = -1;
-
-    private String partNo;
+    private final String MAX_LENGTH_ERROR = 
+            "Sorry, you have reached the maximum of 10 items.\nNo more items can be saved.";
+    private final String INCOMPLETE_ENTRY_ERROR =
+            "Sorry, you must complete all fields. Please try again.\n";
     private int foundIndex = NOT_FOUND;
-    private String partDesc;
-    private double partPrice;
+    
+    private Part[] parts;
 
-    private String[] partNums = new String[10];
-    private String[] partDescs = new String[10];
-    private double[] partPrices = new double[10];
-
-    public String getPartNo() {
-        return partNo;
+    public PartManager(){
+        parts = new Part[MIN_RECS];
     }
-
-    public void setPartNo(String partNo) {
-        this.partNo = partNo;
-    }
-
-    public String getPartDesc() {
-        return partDesc;
-    }
-
-    public void setPartDesc(String partDesc) {
-        this.partDesc = partDesc;
-    }
-
-    public double getPartPrice() {
-        return partPrice;
-    }
-
-    public void setPartPrice(double partPrice) {
-        this.partPrice = partPrice;
-    }
-
-    public String getPartNums(int index) {
-        return partNums[index];
-    }
-
-    public void setPartNums(String partNum, int index) {
-        this.partNums[index] = partNum;
-    }
-
-    public String getPartDescs(int index) {
-        return partDescs[index];
-    }
-
-    public void setPartDescs(String partDesc, int index) {
-        this.partDescs[index] = partDesc;
-    }
-
-    public double[] getPartPrices() {
-        return partPrices;
-    }
-
-    public void setPartPrices(double partPrice, int index) {
-        this.partPrices[index] = partPrice;
-    }
-
+    
     public int getFoundIndex() {
         return foundIndex;
     }
     
-    public void enterRecord(int index){
+    public void enterRecord(double partPrice, String partNo, String partDesc){
+        //validation needed for partNo
         foundIndex = NOT_FOUND;
-        partNums[index] = partNo;
-        partDescs[index] = partDesc;
-        partPrices[index] = partPrice;
+        
+        if (parts.length > 10) {
+            JOptionPane.showMessageDialog(null, MAX_LENGTH_ERROR);
+        } else if (partNo.length() == 0 || partDesc.length() == 0 || partPrice == 0){
+            JOptionPane.showMessageDialog(null, INCOMPLETE_ENTRY_ERROR);
+        } else {
+            
+            pmanager.enterRecord(emptyRow);
+            this.emptyRow += 1;
+        }
+        parts[index].setPartNo(partNo);
+        
+        //partNums[index] = partNo;
+        //partDescs[index] = partDesc;
+        //partPrices[index] = partPrice;
     }
     
     public void searchParts(String searchNum){
         if (searchNum != null && searchNum.length() > 0) {
-            for (int i = 0; i < partNums.length; i++) {
-                if (searchNum.equalsIgnoreCase(partNums[i])) {
+            for (int i = 0; i < parts.length; i++) {
+                if (searchNum.equalsIgnoreCase(parts[i].getPartNo())) {
                     foundIndex = i;
                     break;
                 }
             }
         }
+    }
+    
+    public void sortParts(){
+        
+    }
+    
+    public void addNewPart(){
+        //Download Jim's example, STUDY .arraycopy() METHOD!!
+        Part temp[] = new Part[10];
     }
 }

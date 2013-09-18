@@ -21,6 +21,7 @@ public class Employee {
     private boolean movedIn;
     private String cubeId;
     private final int MIN_LENGTH = 2;
+    private final String INPUT_ERROR = "Invalid input, try again.";
 
     public Employee() {
 
@@ -32,7 +33,7 @@ public class Employee {
 
     public void setFirstName(String firstName) {
         if(firstName.length() <= MIN_LENGTH || firstName == null){
-            System.out.println("Invalid first name, try again.");
+            throw new IllegalArgumentException();
         }else{
             this.firstName = firstName;
         }
@@ -44,7 +45,7 @@ public class Employee {
 
     public void setLastName(String lastName) {
         if(lastName.length() <=MIN_LENGTH || lastName == null){
-            System.out.println("Invalid last name, try again.");
+            throw new IllegalArgumentException();
         }else{
             this.lastName = lastName;
         }
@@ -56,7 +57,7 @@ public class Employee {
 
     public void setSsn(String ssn) {
         if(ssn.length() <MIN_LENGTH || ssn == null){
-            System.out.println("Invalid ssn, try again.");
+            throw new IllegalArgumentException();
         }else{
             this.ssn = ssn;
         }
@@ -68,7 +69,7 @@ public class Employee {
 
     public void setBirthDate(Date birthDate) {
         if(birthDate == null){
-            System.out.println("Invalid ssn, try again.");
+            throw new IllegalArgumentException();
         }else{
             this.birthDate = birthDate;
         }
@@ -80,19 +81,19 @@ public class Employee {
 
     public void setCubeId(String cubeId) {
         if(cubeId.length() < MIN_LENGTH || cubeId == null){
-            System.out.println("Invalid cube ID, please try again.");
+            throw new IllegalArgumentException();
         }else{
             this.cubeId = cubeId;
         }
     }
 
     // Assume this must be performed first
-    private void meetWithHrForBenefitAndSalryInfo() {
+    private final void meetWithHrForBenefitAndSalryInfo() {
         metWithHr = true;
     }
 
     // Assume this is must be performed second
-    private void meetDepartmentStaff() {
+    public void meetDepartmentStaff() {
         if(metWithHr) {
             metDeptStaff = true;
         } else {
@@ -102,7 +103,7 @@ public class Employee {
     }
 
     // Assume this must be performed third
-    public void reviewDeptPolicies() {
+    private final void reviewDeptPolicies() {
         if(metWithHr && metDeptStaff) {
             reviewedDeptPolicies = true;
         } else {
@@ -113,7 +114,7 @@ public class Employee {
     }
 
     // Assume this must be performed 4th
-    private void moveIntoCubicle(String cubeId) {
+    public void moveIntoCubicle(String cubeId) {
         if(metWithHr && metDeptStaff && reviewedDeptPolicies) {
             this.cubeId = cubeId;
             this.movedIn = true;
@@ -126,11 +127,11 @@ public class Employee {
 
     }
 
-    public void attendOrientation(){
+    public void attendOrientation(String cubeId){
         meetWithHrForBenefitAndSalryInfo();
         meetDepartmentStaff();
         reviewDeptPolicies();
-        moveIntoCubicle("12345A");
+        moveIntoCubicle(cubeId);
     }
     
     public String getStatus() {

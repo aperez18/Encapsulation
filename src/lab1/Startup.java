@@ -14,8 +14,8 @@ public class Startup {
         employee.setFirstName("Peter");
         employee.setLastName("Piper");
         employee.setSsn("333-1234");
-        
-        employee.attendOrientation();
+        String cubeId = "1234";
+        employee.attendOrientation(cubeId);
 
         System.out.println("The employee's status is: " + employee.getStatus());
     }

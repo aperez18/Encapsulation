@@ -20,8 +20,7 @@ import javax.swing.*;
  * @version     1.00
 */
 public class MainGUI extends javax.swing.JFrame implements ActionListener {
-    private int emptyRow;
-    private final int NOT_FOUND = -1;
+    private final String ENTRY_ERROR = "Error: Invalid Entry. Please try again.\n";
     private PartManager pmanager;
 
     /** Creates new form MainGUI */
@@ -250,39 +249,17 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
 
     private void btnEnterRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterRecordActionPerformed
 
-        pmanager.setPartNo(this.txtNewProdNo.getText());
-        pmanager.setPartDesc(this.txtNewProdDesc.getText());
+        //pmanager.enterRecord(WIDTH, emptyRow, null, null);
+        //pmanager.setPartNo(this.txtNewProdNo.getText());
+        //pmanager.setPartDesc(this.txtNewProdDesc.getText());
         try {
-            pmanager.setPartPrice(Double.parseDouble(this.txtNewProdPrice.getText()));
+            pmanager.enterRecord(Double.parseDouble(this.txtNewProdPrice.getText()), 
+                    this.txtNewProdNo.getText(), this.txtNewProdDesc.getText());
         } catch(Exception e) {
             JOptionPane.showMessageDialog(this,
-                    "Sorry, the price entry must be a whole or floating point number only.\n",
-                    "Number Format Error", JOptionPane.WARNING_MESSAGE);
+                    ENTRY_ERROR, "Input Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        if (emptyRow > 10) {
-            JOptionPane.showMessageDialog(this, 
-                    "Sorry, you have reached the maximum of 10 items.\n"
-                    + "No more items can be saved.", "Maximum Reached", JOptionPane.WARNING_MESSAGE);
-
-        } else if (pmanager.getPartNo().length() == 0 || pmanager.getPartDesc().length() == 0 
-                || this.txtNewProdPrice.getText().length() == 0)
-        {
-            JOptionPane.showMessageDialog(this, 
-                    "Sorry, you must complete all fields. Please try again.",
-                    "Incomplete Part Entry", JOptionPane.WARNING_MESSAGE);
-            this.txtNewProdNo.requestFocus();
-
-        } else {
-            
-            pmanager.enterRecord(emptyRow);
-            //partNums[emptyRow] = partNo;
-            //partDescs[emptyRow] = partDesc;
-            //partPrices[emptyRow] = partPrice;
-            this.emptyRow += 1;
-        }
-
         clearEntryFields();
         this.txtNewProdNo.requestFocus();
 }//GEN-LAST:event_btnEnterRecordActionPerformed
