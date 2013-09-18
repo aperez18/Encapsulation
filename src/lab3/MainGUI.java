@@ -21,6 +21,8 @@ import javax.swing.*;
 */
 public class MainGUI extends javax.swing.JFrame implements ActionListener {
     private final String ENTRY_ERROR = "Error: Invalid Entry. Please try again.\n";
+    private final String FAIL_MESSAGE = "Part Number not found. Please try again.";
+    private final String SUCCESS_MESSAGE = "Part updated successfully!";
     private PartManager pmanager;
 
     /** Creates new form MainGUI */
@@ -269,9 +271,9 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
         String searchNum = txtSearchPartNo.getText();
         if (searchNum != null && searchNum.length() > 0) {
             pmanager.searchParts(searchNum);
-                txtCurProdNo.setText(pmanager.getPartNums(pmanager.getFoundIndex()));
-                txtCurDesc.setText(pmanager.getPartDescs(pmanager.getFoundIndex()));
-                txtCurPrice.setText("" + pmanager.getPartPrices()[pmanager.getFoundIndex()]);
+                txtCurProdNo.setText(pmanager.getPartNo(pmanager.getFoundIndex()));
+                txtCurDesc.setText(pmanager.getPartDesc(pmanager.getFoundIndex()));
+                txtCurPrice.setText("" + pmanager.getPartPrice(pmanager.getFoundIndex()));
         }else{
                 JOptionPane.showMessageDialog(this, ENTRY_ERROR, "Entry Missing",
                         JOptionPane.WARNING_MESSAGE);
@@ -285,17 +287,18 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         if (pmanager.getFoundIndex() == NOT_FOUND) {
-                JOptionPane.showMessageDialog(this,
-                    "Part Number not found. Please try again.",
-                    "Search Failure", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, FAIL_MESSAGE, 
+                        "Search Failure", JOptionPane.WARNING_MESSAGE);
         } else {
-            pmanager.setPartNums(txtCurProdNo.getText(), pmanager.getFoundIndex());
-            pmanager.setPartDescs(txtCurDesc.getText(), pmanager.getFoundIndex());
-            pmanager.getPartPrices()[pmanager.getFoundIndex()] = Double.parseDouble(txtCurPrice.getText());
+            pmanager.updateRecord(Double.parseDouble(txtCurPrice.getText()), 
+                    txtCurProdNo.getText(), txtCurDesc.getText());
+            
+            //pmanager.setPartNum(txtCurProdNo.getText(), pmanager.getFoundIndex());
+            //pmanager.setPartDesc(txtCurDesc.getText(), pmanager.getFoundIndex());
+            //pmanager.getPartPrice(pmanager.getFoundIndex())= Double.parseDouble(txtCurPrice.getText());
             displayList();
-            JOptionPane.showMessageDialog(this,
-                "Part updated successfully!",
-                "Success Confirmation", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, SUCCESS_MESSAGE, 
+                    "Success Confirmation", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 

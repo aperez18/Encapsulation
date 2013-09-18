@@ -33,7 +33,7 @@ public class PartManager {
     }
     
     public void enterRecord(double partPrice, String partNo, String partDesc){
-        //validation needed for partNo
+        //validation needed
         foundIndex = NOT_FOUND;
         
         if (parts.length > 10) {
@@ -49,7 +49,15 @@ public class PartManager {
         }
     }
     
+    public void updateRecord(double partPrice, String partNo, String partDesc){
+        //validation needed
+        parts[foundIndex].setPartPrice(partPrice);
+        parts[foundIndex].setPartNo(partNo);
+        parts[foundIndex].setPartDesc(partDesc);
+    }
+    
     public void searchParts(String searchNum){
+        //validation needed
         if (searchNum != null && searchNum.length() > 0) {
             for (int i = 0; i < parts.length; i++) {
                 if (searchNum.equalsIgnoreCase(parts[i].getPartNo())) {
@@ -64,11 +72,21 @@ public class PartManager {
     }
     
     public void sortParts(){
-        
+        //working logic goes here
     }
     
     public void addNewPart(){
         //Download Jim's example, STUDY .arraycopy() METHOD!!
         Part temp[] = new Part[parts.length];
+    }
+    
+    public double getPartPrice(int index){
+        return parts[index].getPartPrice();
+    }
+    public String getPartNo(int index){
+        return parts[index].getPartNo();
+    }
+    public String getPartDesc(int index){
+        return parts[index].getPartDesc();
     }
 }
