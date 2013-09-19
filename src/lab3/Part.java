@@ -13,7 +13,11 @@ public class Part {
     private String partDesc;
     private double partPrice;
     
-    
+    public Part(double partPrice, String partNo, String partDesc){
+        this.partPrice = partPrice;
+        this.partNo = partNo;
+        this.partDesc = partDesc;
+    }
     
     public String getPartNo() {
         return partNo;

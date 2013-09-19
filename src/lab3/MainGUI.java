@@ -256,8 +256,13 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
         //pmanager.setPartNo(this.txtNewProdNo.getText());
         //pmanager.setPartDesc(this.txtNewProdDesc.getText());
         //try {
+        if(this.txtNewProdPrice.getText().length()==0 || this.txtNewProdNo.getText().length()==0||this.txtNewProdDesc.getText().length()==0){
+            JOptionPane.showMessageDialog(this,
+                    ENTRY_ERROR, "Input Error", JOptionPane.WARNING_MESSAGE);
+        }else{
             pmanager.enterRecord(Double.parseDouble(this.txtNewProdPrice.getText()), 
                     this.txtNewProdNo.getText(), this.txtNewProdDesc.getText());
+        }
         //} catch(Exception e) {
         //    JOptionPane.showMessageDialog(this,
         //            ENTRY_ERROR, "Input Error", JOptionPane.WARNING_MESSAGE);
@@ -318,36 +323,8 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
 
     // Sort by partNumber
     private void sortList() {
-        /*
-        // Only perform the sort if we have records
-        if(pmanager.getParts() > 0) {
-            // Bubble sort routine adapted from sample in text book...
-            // Make sure the operations are peformed on all 3 arrays!
-            for(int passNum = 1; passNum < emptyRow; passNum++) {
-                for(int i = 1; i <= emptyRow-passNum; i++) {
-                    String temp = "";
-                    
-                    temp+= pmanager.getPartPrice(i-1);
-                    
-                    temp += pmanager.getPartPrices()[i-1];
-                    pmanager.setPartPrices(Double.parseDouble(temp), i);
-                    temp = pmanager.getPartNums(i-1);
-                    pmanager.setPartNums(pmanager.getPartNums(i), i-1);
-                    pmanager.setPartNums(temp, i);
-
-                    temp = pmanager.getPartDescs(i-1);
-                    pmanager.setPartDescs(pmanager.getPartDescs(i), i-1);
-                    pmanager.setPartDescs(temp, i);
-                }
-            }*/
-            // Once it's sorted, display in the list box
             pmanager.sortParts();
             displayList();
-        //} else {
-        //    JOptionPane.showMessageDialog(this,
-        //            "Sorry, there are not items to sort", "Sort Error",
-        //            JOptionPane.WARNING_MESSAGE);
-        //}
     }
 
     private void clearEntryFields() {

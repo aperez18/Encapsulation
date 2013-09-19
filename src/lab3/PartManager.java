@@ -33,8 +33,8 @@ public class PartManager {
     }
     
     public void enterRecord(double partPrice, String partNo, String partDesc){
-        //validation needed
-        Part temp[] = new Part[parts.length];
+        
+        Part temp[] = new Part[parts.length+1];
         foundIndex = NOT_FOUND;
         
         if (parts.length > MAX_RECS) {
@@ -42,15 +42,10 @@ public class PartManager {
         } else if (partNo.length() == 0 || partDesc.length() == 0 || partPrice == 0){
             JOptionPane.showMessageDialog(null, INCOMPLETE_ENTRY_ERROR);
         } else {
-            
-            //for(int i=1; i<=parts.length; i++){
-            //    temp[i-1]
-            //}
+            Part partIn = new Part(partPrice, partNo, partDesc);
             System.arraycopy(parts, 0, temp, 0, parts.length);
             parts = temp;
-            parts[parts.length-1].setPartPrice(partPrice);
-            parts[parts.length-1].setPartNo(partNo);
-            parts[parts.length-1].setPartDesc(partDesc);
+            parts[parts.length-1] = partIn;
         }
     }
     
@@ -64,7 +59,7 @@ public class PartManager {
     public void searchParts(String searchNum){
         //validation needed
         if (searchNum != null && searchNum.length() > 0) {
-            for (int i = 0; i < parts.length; i++) {
+            for (int i = 0; i <= parts.length; i++) {
                 if (searchNum.equalsIgnoreCase(parts[i].getPartNo())) {
                     foundIndex = i;
                     break;
@@ -84,7 +79,6 @@ public class PartManager {
         }
     }
     public void sortParts(){
-        //working logic goes here
         // Only perform the sort if we have records
         if(parts.length > MIN_RECS) {
             // Bubble sort routine adapted from sample in text book...
@@ -105,16 +99,6 @@ public class PartManager {
                     temp = parts[i-1].getPartDesc();
                     parts[i-1].setPartDesc(parts[i].getPartDesc());
                     parts[i].setPartDesc(temp);
-                    //////////////////////////////////////////////////////
-                    //temp += pmanager.getPartPrices()[i-1];
-                    //pmanager.setPartPrices(Double.parseDouble(temp), i);
-                    //temp = pmanager.getPartNums(i-1);
-                    //pmanager.setPartNums(pmanager.getPartNums(i), i-1);
-                    //pmanager.setPartNums(temp, i);
-                    //temp = pmanager.getPartDescs(i-1);
-                    //pmanager.setPartDescs(pmanager.getPartDescs(i), i-1);
-                    //pmanager.setPartDescs(temp, i);
-                    //////////////////////////////////////////////////////
                 }
             }
         }else {
