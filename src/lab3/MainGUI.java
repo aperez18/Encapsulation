@@ -255,14 +255,14 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
         //pmanager.enterRecord(WIDTH, emptyRow, null, null);
         //pmanager.setPartNo(this.txtNewProdNo.getText());
         //pmanager.setPartDesc(this.txtNewProdDesc.getText());
-        try {
+        //try {
             pmanager.enterRecord(Double.parseDouble(this.txtNewProdPrice.getText()), 
                     this.txtNewProdNo.getText(), this.txtNewProdDesc.getText());
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(this,
-                    ENTRY_ERROR, "Input Error", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        //} catch(Exception e) {
+        //    JOptionPane.showMessageDialog(this,
+        //            ENTRY_ERROR, "Input Error", JOptionPane.WARNING_MESSAGE);
+        //    return;
+        //}
         clearEntryFields();
         this.txtNewProdNo.requestFocus();
 }//GEN-LAST:event_btnEnterRecordActionPerformed
@@ -341,12 +341,13 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
                 }
             }*/
             // Once it's sorted, display in the list box
+            pmanager.sortParts();
             displayList();
-        } else {
-            JOptionPane.showMessageDialog(this,
-                    "Sorry, there are not items to sort", "Sort Error",
-                    JOptionPane.WARNING_MESSAGE);
-        }
+        //} else {
+        //    JOptionPane.showMessageDialog(this,
+        //            "Sorry, there are not items to sort", "Sort Error",
+        //            JOptionPane.WARNING_MESSAGE);
+        //}
     }
 
     private void clearEntryFields() {

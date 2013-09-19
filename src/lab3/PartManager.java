@@ -19,10 +19,10 @@ public class PartManager {
             "Sorry, you must complete all fields. Please try again.";
     private final String NOT_FOUND_ERROR = 
             "Part Number not found. Please try again.";
+    private final String NOT_ENOUGH_ITEMS =  "Sorry, there are not items to sort";
     private int foundIndex = NOT_FOUND;
     
-    private Part[] parts;
-    private int index = 0;
+    private Part parts[];
 
     public PartManager(){
         parts = new Part[MIN_RECS];
@@ -34,18 +34,23 @@ public class PartManager {
     
     public void enterRecord(double partPrice, String partNo, String partDesc){
         //validation needed
+        Part temp[] = new Part[parts.length];
         foundIndex = NOT_FOUND;
         
-        if (parts.length > 10) {
+        if (parts.length > MAX_RECS) {
             JOptionPane.showMessageDialog(null, MAX_LENGTH_ERROR);
         } else if (partNo.length() == 0 || partDesc.length() == 0 || partPrice == 0){
             JOptionPane.showMessageDialog(null, INCOMPLETE_ENTRY_ERROR);
         } else {
             
-            parts[index].setPartPrice(partPrice);
-            parts[index].setPartNo(partNo);
-            parts[index].setPartDesc(partDesc);
-            index++;
+            //for(int i=1; i<=parts.length; i++){
+            //    temp[i-1]
+            //}
+            System.arraycopy(parts, 0, temp, 0, parts.length);
+            parts = temp;
+            parts[parts.length-1].setPartPrice(partPrice);
+            parts[parts.length-1].setPartNo(partNo);
+            parts[parts.length-1].setPartDesc(partDesc);
         }
     }
     
@@ -96,6 +101,10 @@ public class PartManager {
                     temp = parts[i-1].getPartNo();
                     parts[i-1].setPartNo(parts[i].getPartNo());
                     parts[i].setPartNo(temp);
+                    
+                    temp = parts[i-1].getPartDesc();
+                    parts[i-1].setPartDesc(parts[i].getPartDesc());
+                    parts[i].setPartDesc(temp);
                     //////////////////////////////////////////////////////
                     //temp += pmanager.getPartPrices()[i-1];
                     //pmanager.setPartPrices(Double.parseDouble(temp), i);
@@ -108,12 +117,16 @@ public class PartManager {
                     //////////////////////////////////////////////////////
                 }
             }
+        }else {
+            JOptionPane.showMessageDialog(null,NOT_ENOUGH_ITEMS,
+                    "Sort Error", JOptionPane.WARNING_MESSAGE);
+        }
     }
     
-    public void addNewPart(){
+    //public void addNewPart(){
         //Download Jim's example, STUDY .arraycopy() METHOD!!
-        Part temp[] = new Part[parts.length];
-    }
+    //    Part temp[] = new Part[parts.length];
+    //}
     
     public double getPartPrice(int index){
         return parts[index].getPartPrice();
