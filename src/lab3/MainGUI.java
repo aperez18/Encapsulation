@@ -23,6 +23,7 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
     private final String ENTRY_ERROR = "Error: Invalid Entry. Please try again.\n";
     private final String FAIL_MESSAGE = "Part Number not found. Please try again.";
     private final String SUCCESS_MESSAGE = "Part updated successfully!";
+    private final String LIST_TOP = "Part\tDesc\t\tPrice\n====\t====\t\t=====\n";
     private PartManager pmanager;
 
     /** Creates new form MainGUI */
@@ -286,19 +287,17 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_btnDisplayListActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        if (pmanager.getFoundIndex() == NOT_FOUND) {
-                JOptionPane.showMessageDialog(this, FAIL_MESSAGE, 
-                        "Search Failure", JOptionPane.WARNING_MESSAGE);
-        } else {
+        if (pmanager.partFound()) {
+            
             pmanager.updateRecord(Double.parseDouble(txtCurPrice.getText()), 
                     txtCurProdNo.getText(), txtCurDesc.getText());
             
-            //pmanager.setPartNum(txtCurProdNo.getText(), pmanager.getFoundIndex());
-            //pmanager.setPartDesc(txtCurDesc.getText(), pmanager.getFoundIndex());
-            //pmanager.getPartPrice(pmanager.getFoundIndex())= Double.parseDouble(txtCurPrice.getText());
             displayList();
             JOptionPane.showMessageDialog(this, SUCCESS_MESSAGE, 
                     "Success Confirmation", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+                JOptionPane.showMessageDialog(this, FAIL_MESSAGE, 
+                        "Search Failure", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -309,23 +308,27 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
     private void displayList() {
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         listProducts.setText(""); // clear list
-        listProducts.append("Part\tDesc\t\tPrice\n====\t====\t\t=====\n");
-        for (int i = 0 ; i < emptyRow; i++) {
-            String rLine = pmanager.getPartNums(i) + "\t"
-                    + pmanager.getPartDescs(i) + "\t\t" + nf.format(pmanager.getPartPrices()[i]) + "\n";
+        listProducts.append(LIST_TOP);
+        for (int i = 0 ; i < pmanager.getParts(); i++) {
+            String rLine = pmanager.getPartNo(i) + "\t"
+                    + pmanager.getPartDesc(i) + "\t\t" + nf.format(pmanager.getPartPrice(i)) + "\n";
             listProducts.append(rLine);
         }
     }
 
     // Sort by partNumber
     private void sortList() {
+        /*
         // Only perform the sort if we have records
-        if(emptyRow > 0) {
+        if(pmanager.getParts() > 0) {
             // Bubble sort routine adapted from sample in text book...
             // Make sure the operations are peformed on all 3 arrays!
             for(int passNum = 1; passNum < emptyRow; passNum++) {
                 for(int i = 1; i <= emptyRow-passNum; i++) {
                     String temp = "";
+                    
+                    temp+= pmanager.getPartPrice(i-1);
+                    
                     temp += pmanager.getPartPrices()[i-1];
                     pmanager.setPartPrices(Double.parseDouble(temp), i);
                     temp = pmanager.getPartNums(i-1);
@@ -336,7 +339,7 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
                     pmanager.setPartDescs(pmanager.getPartDescs(i), i-1);
                     pmanager.setPartDescs(temp, i);
                 }
-            }
+            }*/
             // Once it's sorted, display in the list box
             displayList();
         } else {

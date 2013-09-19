@@ -71,8 +71,43 @@ public class PartManager {
         }
     }
     
+    public boolean partFound(){
+        if(foundIndex > NOT_FOUND){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public void sortParts(){
         //working logic goes here
+        // Only perform the sort if we have records
+        if(parts.length > MIN_RECS) {
+            // Bubble sort routine adapted from sample in text book...
+            // Make sure the operations are peformed on all 3 arrays!
+            for(int passNum = 1; passNum < parts.length-1; passNum++) {
+                String temp ="";
+                double tempPrice;
+                for(int i = 1; i <= (parts.length-1)-passNum; i++) {
+                    
+                    tempPrice = parts[i-1].getPartPrice();
+                    parts[i-1].setPartPrice(parts[i].getPartPrice());
+                    parts[i].setPartPrice(tempPrice);
+                    
+                    temp = parts[i-1].getPartNo();
+                    parts[i-1].setPartNo(parts[i].getPartNo());
+                    parts[i].setPartNo(temp);
+                    //////////////////////////////////////////////////////
+                    //temp += pmanager.getPartPrices()[i-1];
+                    //pmanager.setPartPrices(Double.parseDouble(temp), i);
+                    //temp = pmanager.getPartNums(i-1);
+                    //pmanager.setPartNums(pmanager.getPartNums(i), i-1);
+                    //pmanager.setPartNums(temp, i);
+                    //temp = pmanager.getPartDescs(i-1);
+                    //pmanager.setPartDescs(pmanager.getPartDescs(i), i-1);
+                    //pmanager.setPartDescs(temp, i);
+                    //////////////////////////////////////////////////////
+                }
+            }
     }
     
     public void addNewPart(){
@@ -88,5 +123,8 @@ public class PartManager {
     }
     public String getPartDesc(int index){
         return parts[index].getPartDesc();
+    }
+    public int getParts(){
+        return parts.length - 1;
     }
 }
